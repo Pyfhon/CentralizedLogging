@@ -3,6 +3,7 @@ services:
     image: datalust/seq:latest
     environment:
       - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_NOAUTHENTICATION=True
     ports:
       - "8081:80"
       - "5341:5341"
@@ -17,8 +18,9 @@ services:
       dockerfile: src/ServiceB/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:5002
-      - SEQ_URL=http://seq:5341
+      - SEQ_URL=http://seq
       - SERVICE_NAME=ServiceB
+      - LOG_ROOT=/app/logs
     ports:
       - "5002:5002"
     volumes:
@@ -34,8 +36,9 @@ services:
       dockerfile: src/ServiceA/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:5001
-      - SEQ_URL=http://seq:5341
+      - SEQ_URL=http://seq
       - SERVICE_NAME=ServiceA
+      - LOG_ROOT=/app/logs
       - SERVICEB_URL=http://serviceb:5002
     ports:
       - "5001:5001"
@@ -52,8 +55,9 @@ services:
       context: .
       dockerfile: src/Client.Console/Dockerfile
     environment:
-      - SEQ_URL=http://seq:5341
+      - SEQ_URL=http://seq
       - SERVICE_NAME=Client
+      - LOG_ROOT=/app/logs
       - SERVICEA_URL=http://servicea:5001
     depends_on:
       - seq
@@ -70,3 +74,4 @@ networks:
 
 volumes:
   seq-data:
+

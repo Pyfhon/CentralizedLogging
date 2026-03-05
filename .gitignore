@@ -1,0 +1,12 @@
+# Build artifacts
+**/bin/
+**/obj/
+
+# Runtime logs
+logs/
+**/nlog-internal.log
+
+# IDE
+.vs/
+.idea/
+.vscode/

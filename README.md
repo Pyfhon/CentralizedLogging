@@ -7,9 +7,15 @@
   - локально в файл (`TRACE+`)
   - централизованно в Seq (`INFO+`)
 
+## Требования
+
+- Docker Desktop (Linux containers) запущен, иначе `docker compose` не сможет подключиться к `//./pipe/dockerDesktopLinuxEngine`.
+- .NET SDK 8.0+ для локального запуска без Docker.
 ## Запуск одной командой через Docker Compose
 
 Поднять Seq + ServiceA + ServiceB:
+
+Для `datalust/seq:latest` в демо отключена авторизация на первом запуске (`SEQ_FIRSTRUN_NOAUTHENTICATION=True`), чтобы контейнер стартовал без ручной инициализации.
 
 ```bash
 docker compose up -d --build seq servicea serviceb
@@ -66,3 +72,7 @@ dotnet run --project src/Client.Console
 - ServiceA → `http://localhost:5002`
 
 В Docker URL подставляются из переменных окружения (`SERVICEA_URL`, `SERVICEB_URL`, `SEQ_URL`, `SERVICE_NAME`).
+
+
+
+

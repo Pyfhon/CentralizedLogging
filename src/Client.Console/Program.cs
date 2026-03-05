@@ -3,14 +3,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
-using NLog.Web;
+using NLog.Extensions.Logging;
 
 Activity.DefaultIdFormat = ActivityIdFormat.W3C;
 Activity.ForceDefaultIdFormat = true;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Logging.ClearProviders();
-builder.Host.UseNLog();
+builder.Logging.AddNLog();
 var serviceAUrl = builder.Configuration["SERVICEA_URL"] ?? "http://localhost:5001";
 builder.Services.AddHttpClient("serviceA", client => client.BaseAddress = new Uri(serviceAUrl));
 
@@ -32,3 +32,6 @@ var response = await client.GetAsync("/do");
 var body = await response.Content.ReadAsStringAsync();
 
 logger.LogInformation("ServiceA response: Status={StatusCode} Body={Body}", (int)response.StatusCode, body);
+
+LogManager.Shutdown();
+

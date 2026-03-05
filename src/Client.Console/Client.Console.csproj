@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog" Version="5.3.4" />
-    <PackageReference Include="NLog.DiagnosticSource" Version="5.3.4" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.4" />
-    <PackageReference Include="NLog.Targets.Seq" Version="6.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
+    <PackageReference Include="NLog" Version="6.0.0" />
+    <PackageReference Include="NLog.DiagnosticSource" Version="6.0.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="NLog.Targets.Seq" Version="4.0.3-dev-00186" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,3 +21,4 @@
     </None>
   </ItemGroup>
 </Project>
+
