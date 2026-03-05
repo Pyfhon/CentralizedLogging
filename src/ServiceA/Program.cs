@@ -7,8 +7,8 @@ using NLog.Web;
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Host.UseNLog();
-builder.WebHost.UseUrls("http://localhost:5001");
-builder.Services.AddHttpClient("serviceB", client => client.BaseAddress = new Uri("http://localhost:5002"));
+var serviceBUrl = builder.Configuration["SERVICEB_URL"] ?? "http://localhost:5002";
+builder.Services.AddHttpClient("serviceB", client => client.BaseAddress = new Uri(serviceBUrl));
 
 var app = builder.Build();
 

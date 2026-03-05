@@ -11,7 +11,8 @@ Activity.ForceDefaultIdFormat = true;
 var builder = Host.CreateApplicationBuilder(args);
 builder.Logging.ClearProviders();
 builder.Host.UseNLog();
-builder.Services.AddHttpClient("serviceA", client => client.BaseAddress = new Uri("http://localhost:5001"));
+var serviceAUrl = builder.Configuration["SERVICEA_URL"] ?? "http://localhost:5001";
+builder.Services.AddHttpClient("serviceA", client => client.BaseAddress = new Uri(serviceAUrl));
 
 using var app = builder.Build();
 var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Client.Console");

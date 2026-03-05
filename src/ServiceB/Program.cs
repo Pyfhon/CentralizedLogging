@@ -6,7 +6,6 @@ using NLog.Web;
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Host.UseNLog();
-builder.WebHost.UseUrls("http://localhost:5002");
 
 var app = builder.Build();
 
